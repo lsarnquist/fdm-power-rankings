@@ -13,7 +13,6 @@
     --text-muted: #8a8580;
     --accent: #ff4444;
     --border: #2a2a2a;
-
     --salmon: #FA8072;
     --red: #FF0000;
     --hotpink: #FF69B4;
@@ -23,103 +22,19 @@
     --purple: #9B30FF;
     --green: #32CD32;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Source Serif 4', Georgia, serif;
-    line-height: 1.7;
-    min-height: 100vh;
-  }
-
-  .noise {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 999;
-  }
-
-  .header {
-    text-align: center;
-    padding: 60px 20px 40px;
-    border-bottom: 3px solid var(--accent);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(255,68,68,0.08) 0%, transparent 60%);
-  }
-
-  .header .kicker {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
-    position: relative;
-  }
-
-  .header h1 {
-    font-family: 'Dela Gothic One', sans-serif;
-    font-size: clamp(2.2rem, 6vw, 4.5rem);
-    line-height: 1.05;
-    letter-spacing: -1px;
-    position: relative;
-    margin-bottom: 12px;
-  }
-
-  .header .subtitle {
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .header .dateline {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: var(--text-muted);
-    margin-top: 20px;
-    position: relative;
-  }
-
-  .container {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0 20px 80px;
-  }
-
-  .intro {
-    padding: 40px 0 30px;
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .ranking-card {
-    border-bottom: 1px solid var(--border);
-    padding: 40px 0;
-    position: relative;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  body { background: var(--bg); color: var(--text); font-family: 'Source Serif 4', Georgia, serif; line-height: 1.7; min-height: 100vh; }
+  .noise { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; }
+  .header { text-align: center; padding: 60px 20px 40px; border-bottom: 3px solid var(--accent); position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 50% 0%, rgba(255,68,68,0.08) 0%, transparent 60%); }
+  .header .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; position: relative; }
+  .header h1 { font-family: 'Dela Gothic One', sans-serif; font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -1px; position: relative; margin-bottom: 12px; }
+  .header .subtitle { font-style: italic; font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; position: relative; }
+  .header .dateline { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); margin-top: 20px; position: relative; }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px 80px; }
+  .intro { padding: 40px 0 30px; font-size: 1.1rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+  .ranking-card { border-bottom: 1px solid var(--border); padding: 40px 0; position: relative; opacity: 0; animation: fadeUp 0.5s ease forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .ranking-card:nth-child(1) { animation-delay: 0.1s; }
   .ranking-card:nth-child(2) { animation-delay: 0.15s; }
   .ranking-card:nth-child(3) { animation-delay: 0.2s; }
@@ -128,137 +43,42 @@
   .ranking-card:nth-child(6) { animation-delay: 0.35s; }
   .ranking-card:nth-child(7) { animation-delay: 0.4s; }
   .ranking-card:nth-child(8) { animation-delay: 0.45s; }
-
-  .rank-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 14px;
-  }
-
-  .rank-number {
-    font-family: 'Dela Gothic One', sans-serif;
-    font-size: 3.5rem;
-    line-height: 1;
-    min-width: 60px;
-    color: var(--text-muted);
-    opacity: 0.3;
-  }
-
-  .rank-info {
-    flex: 1;
-  }
-
-  .team-name {
-    font-family: 'Dela Gothic One', sans-serif;
-    font-size: 1.5rem;
-    line-height: 1.2;
-    margin-bottom: 4px;
-  }
-
-  .team-color-bar {
-    height: 4px;
-    width: 80px;
-    border-radius: 2px;
-    margin-bottom: 8px;
-  }
-
-  .team-owner {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .roster-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 14px 0 18px;
-  }
-
-  .chip {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    padding: 3px 10px;
-    border-radius: 3px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    white-space: nowrap;
-  }
-
-  .chip.star {
-    border-color: rgba(255,255,255,0.15);
-    color: var(--text);
-    background: #252525;
-  }
-
-  .blurb {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--text);
-  }
-
-  .blurb strong {
-    color: #fff;
-  }
-
-  .vibe-meter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 16px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-  }
-
-  .vibe-bar {
-    height: 6px;
-    border-radius: 3px;
-    flex: 1;
-    background: var(--border);
-    overflow: hidden;
-    max-width: 200px;
-  }
-
-  .vibe-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 1s ease;
-  }
-
-  .footer-note {
-    margin-top: 60px;
-    padding-top: 30px;
-    border-top: 1px solid var(--border);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-    text-align: center;
-    line-height: 2;
-  }
+  .rank-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
+  .rank-number { font-family: 'Dela Gothic One', sans-serif; font-size: 3.5rem; line-height: 1; min-width: 60px; color: var(--text-muted); opacity: 0.3; }
+  .rank-info { flex: 1; }
+  .team-name { font-family: 'Dela Gothic One', sans-serif; font-size: 1.5rem; line-height: 1.2; margin-bottom: 4px; }
+  .team-color-bar { height: 4px; width: 80px; border-radius: 2px; margin-bottom: 8px; }
+  .team-owner { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+  .score-line { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); margin-bottom: 6px; }
+  .roster-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 18px; }
+  .chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 10px; border-radius: 3px; background: var(--card-bg); border: 1px solid var(--border); color: var(--text-muted); white-space: nowrap; }
+  .chip.star { border-color: rgba(255,255,255,0.15); color: var(--text); background: #252525; }
+  .chip.dead { text-decoration: line-through; opacity: 0.4; }
+  .chip.scored { border-color: rgba(50,205,50,0.4); color: #90EE90; background: rgba(50,205,50,0.08); }
+  .blurb { font-size: 1.05rem; line-height: 1.8; color: var(--text); }
+  .blurb strong { color: #fff; }
+  .vibe-meter { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); }
+  .vibe-bar { height: 6px; border-radius: 3px; flex: 1; background: var(--border); overflow: hidden; max-width: 200px; }
+  .vibe-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+  .footer-note { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-align: center; line-height: 2; }
 </style>
 </head>
 <body>
 <div class="noise"></div>
-
+ 
 <div class="header">
   <div class="kicker">The Only Rankings That Matter</div>
   <h1>FDM 2026<br>Power Rankings</h1>
   <div class="subtitle">Eight teams. Sixty-four schools. One very silly scoring system that takes way too long to explain.</div>
-  <div class="dateline">March 18, 2026 &bull; Pre-Tournament Edition &bull; 0 of 63 Games Played</div>
+  <div class="dateline">March 20, 2026 &bull; First Round Update &bull; 20 of 63 Games Played</div>
 </div>
-
+ 
 <div class="container">
-
+ 
   <div class="intro">
-    The madness begins tomorrow. Brackets are locked. Rosters are set. And somewhere, right now, a guy who drafted two 6-seeds is Googling "can you trade in a fantasy bracket pool." Here's where everyone stands before the first ball is tipped.
+    The first round is halfway done and the chaos has already arrived. High Point just did WHAT to Wisconsin? VCU made UNC look like a DIII squad? Not everyone has played the same number of games yet, so take the standings with a grain of salt &mdash; and remember, this tournament is far from over for anyone. The big favorites don't start stacking serious points until the later rounds, so the current leaderboard will shift. But a picture is starting to emerge. Historically, the teams that leave the first round with the most teams alive do the best in FDM &mdash; and some rosters are already looking thin.
   </div>
-
+ 
   <!-- #1 LIA — GREEN -->
   <div class="ranking-card">
     <div class="rank-header">
@@ -269,176 +89,182 @@
         <div class="team-owner">Lia</div>
       </div>
     </div>
+    <div class="score-line">45 PTS &bull; 6 of 8 teams alive &bull; &mdash; at #1</div>
     <div class="roster-chips">
-      <span class="chip star">Michigan (1)</span>
+      <span class="chip scored">Michigan (1) +1</span>
       <span class="chip star">Florida (1)</span>
-      <span class="chip">Texas (11)</span>
-      <span class="chip">Northern Iowa (12)</span>
-      <span class="chip">Santa Clara (10)</span>
-      <span class="chip">High Point (12)</span>
+      <span class="chip scored">NC State / <span style="text-decoration:underline">Texas</span> (11) +21</span>
+      <span class="chip star">Northern Iowa (12)</span>
+      <span class="chip dead">Santa Clara (10) &times;</span>
+      <span class="chip scored">High Point (12) +23</span>
       <span class="chip">Queens (15)</span>
-      <span class="chip">Wright St. (14)</span>
+      <span class="chip dead">Wright St. (14) &times;</span>
     </div>
     <div class="blurb">
-      Lia walked out of draft night with <strong>both Michigan and Florida</strong> &mdash; the betting favorite and the defending national champion &mdash; and nobody seems to be talking about it. Michigan (+325 to win it all) is the most complete team in the field, and Florida is a 1-seed with the institutional memory of cutting down nets last April. Those two alone could generate points deep into the second weekend, and Texas as an 11-seed adds first-round upset juice on top. Northern Iowa, a popular Cinderella pick with the 24th-ranked KenPom defense, is a sneaky bonus. This roster has the highest floor in the league and one of the highest ceilings. The Green Machine isn't flashy. It's just terrifyingly well-constructed.
+      <strong>Forty-five points.</strong> In the first round. That's not a typo. High Point &mdash; a 12-seed that nobody outside of the Lia household circled &mdash; just put 23 FDM points on the board by pantsing Wisconsin. Texas chipped in 21 by knocking off BYU. Michigan quietly won too. And Lia still has Florida (the defending champ) and Northern Iowa (who drew the under-seeded St. John's) waiting in the wings. The only blemishes are Santa Clara &mdash; who was literally 2.4 seconds from pulling the upset before Kentucky's Otega Oweh banked in a half-court heave at the buzzer to force overtime &mdash; and Wright St. falling to Virginia. Pre-tournament, we said the two 1-seeds gave this roster one of the highest ceilings in the league. Now, with the supporting cast going off like this, <strong>The Green Machine also has the highest floor.</strong> That's a terrifying combination.
     </div>
     <div class="vibe-meter">
       <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:92%; background: linear-gradient(90deg, var(--green), #90EE90);"></div></div>
-      <span>Megatron</span>
+      <div class="vibe-bar"><div class="vibe-fill" style="width:97%; background: linear-gradient(90deg, var(--green), #90EE90);"></div></div>
+      <span>Untouchable</span>
     </div>
   </div>
-
-  <!-- #2 BOB1 — PURPLE -->
+ 
+  <!-- #2 CHAD — SALMON -->
   <div class="ranking-card">
     <div class="rank-header">
       <div class="rank-number">2</div>
       <div class="rank-info">
-        <div class="team-color-bar" style="background: var(--purple);"></div>
-        <div class="team-name" style="color: var(--purple);">Purple Reign</div>
-        <div class="team-owner">Bob1</div>
+        <div class="team-color-bar" style="background: var(--salmon);"></div>
+        <div class="team-name" style="color: var(--salmon);">SaLmon Surge</div>
+        <div class="team-owner">Chad</div>
       </div>
     </div>
+    <div class="score-line">38 PTS &bull; 7 of 8 teams alive &bull; &uarr; from #5</div>
     <div class="roster-chips">
-      <span class="chip star">Purdue (2)</span>
-      <span class="chip star">Illinois (3)</span>
-      <span class="chip star">St. John's (5)</span>
-      <span class="chip">SMU/Miami OH (11)</span>
-      <span class="chip">Hofstra (13)</span>
-      <span class="chip">Kennesaw St. (14)</span>
-      <span class="chip">North Dakota St. (14)</span>
-      <span class="chip">Saint Louis (9)</span>
+      <span class="chip scored">Arizona (1) +1</span>
+      <span class="chip star">Alabama (4)</span>
+      <span class="chip star">Kansas (4)</span>
+      <span class="chip scored">Nebraska (4) +7</span>
+      <span class="chip scored">Louisville (6) +11</span>
+      <span class="chip dead">North Carolina (6) &times;</span>
+      <span class="chip scored">Texas A&M (10) +19</span>
+      <span class="chip"><span style="text-decoration:underline">Lehigh</span> / PVAMU (16)</span>
     </div>
     <div class="blurb">
-      The sleeper pick to win the whole thing, and it all hinges on one beautiful heist: <strong>St. John's is seeded as a 5 but plays like a 2.</strong> Nate Silver's COOPER model thinks the Johnnies are a legitimate top-8 team that the committee treated like a mid-major. Rick Pitino just won the Big East tournament and his team is going to score FDM points like a 5-seed while playing like a title contender. Pair that with Purdue (most efficient offense in America, Braden Smith about to break Bobby Hurley's all-time assists record) and Illinois (22-1 title odds before the tourney), and Purple Reign has three teams that could realistically reach the Elite Eight. SMU as an 11-seed adds a cherry on top. This is the roster that could look genius by Sunday night.
+      We owe Chad an apology. We roasted those 6-seeds, and what does Louisville do? It goes out and beats South Florida 83-79 for 11 FDM points &mdash; though "beats" is generous, since Louisville was up 22 and nearly choked it away before hanging on. Chad and Luke went head-to-head in two 6-vs-11 matchups and split them &mdash; Louisville survived South Florida, but VCU took down UNC in overtime. Texas A&M added 19 by knocking off Saint Mary's, Nebraska contributed 7, and Arizona took care of business. <strong>Chad has vaulted from 5th to 2nd</strong> and still has Alabama and Kansas waiting to play. The Salmon is swimming upstream, and it's working.
     </div>
     <div class="vibe-meter">
       <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:85%; background: linear-gradient(90deg, var(--purple), #D896FF);"></div></div>
-      <span>Pitino Smirk</span>
+      <div class="vibe-bar"><div class="vibe-fill" style="width:82%; background: linear-gradient(90deg, var(--salmon), #FFB4A8);"></div></div>
+      <span>Revenge Tour</span>
     </div>
   </div>
-
-  <!-- #3 LUKE — RED -->
+ 
+  <!-- #3 BOB2 — SILVER -->
   <div class="ranking-card">
     <div class="rank-header">
       <div class="rank-number">3</div>
+      <div class="rank-info">
+        <div class="team-color-bar" style="background: var(--silver);"></div>
+        <div class="team-name" style="color: var(--silver);">Sterling Silver</div>
+        <div class="team-owner">Bob2</div>
+      </div>
+    </div>
+    <div class="score-line">30 PTS &bull; 5 of 8 teams alive &bull; &uarr; from #8</div>
+    <div class="roster-chips">
+      <span class="chip scored">Kentucky (7) +13</span>
+      <span class="chip star">Tennessee (6)</span>
+      <span class="chip dead">BYU (6) &times;</span>
+      <span class="chip star">UCF (10)</span>
+      <span class="chip star">Clemson (8)</span>
+      <span class="chip dead">Penn (14) &times;</span>
+      <span class="chip scored">TCU (9) +17</span>
+      <span class="chip dead"><span style="text-decoration:underline">Howard</span> / UMBC (16) &times;</span>
+    </div>
+    <div class="blurb">
+      <strong>From last to third.</strong> We said "Thoughts &amp; Prayers" and apparently somebody was listening &mdash; or maybe it was Bob2's self-proclaimed proprietary algorithm. Kentucky dropped 13 points by beating Santa Clara, and TCU &mdash; a 9-seed nobody was thinking about &mdash; knocked off Ohio State for 17. Bob2 has already lost three teams (BYU got bounced by Texas, Penn got blasted by Illinois, Howard fell to Michigan), which is exactly what happens when you draft 6-seeds and double-digit seeds. But the math doesn't care about process. Tennessee still has to play Miami (OH) today, and Clemson and UCF are also waiting. Tarnished Silver has been polished into Sterling Silver. For now.
+    </div>
+    <div class="vibe-meter">
+      <span>Vibes</span>
+      <div class="vibe-bar"><div class="vibe-fill" style="width:62%; background: linear-gradient(90deg, var(--silver), #E0E0E0);"></div></div>
+      <span>Zombie Mode</span>
+    </div>
+  </div>
+ 
+  <!-- #4 LUKE — RED -->
+  <div class="ranking-card">
+    <div class="rank-header">
+      <div class="rank-number">4</div>
       <div class="rank-info">
         <div class="team-color-bar" style="background: var(--red);"></div>
         <div class="team-name" style="color: var(--red);">Red Rocket</div>
         <div class="team-owner">Luke</div>
       </div>
     </div>
+    <div class="score-line">27 PTS &bull; 6 of 8 teams alive &bull; &darr; from #3</div>
     <div class="roster-chips">
-      <span class="chip star">Duke (1)</span>
-      <span class="chip star">VCU (11)</span>
-      <span class="chip star">Michigan St. (3)</span>
-      <span class="chip">South Florida (11)</span>
-      <span class="chip">UCLA (7)</span>
-      <span class="chip">Villanova (8)</span>
-      <span class="chip">Furman (15)</span>
-      <span class="chip">Siena (16)</span>
+      <span class="chip scored">Duke (1) +1</span>
+      <span class="chip scored">VCU (11) +21</span>
+      <span class="chip scored">Michigan St. (3) +5</span>
+      <span class="chip dead">South Florida (11) &times;</span>
+      <span class="chip star">UCLA (7)</span>
+      <span class="chip star">Villanova (8)</span>
+      <span class="chip star">Furman (15)</span>
+      <span class="chip dead">Siena (16) &times;</span>
     </div>
     <div class="blurb">
-      The Red Rocket is built the way FDM should be built: an elite anchor in <strong>Duke</strong> (the #1 overall seed, Cameron Boozer is a walking bucket), two 11-seeds in prime upset spots, and Tom Izzo doing Tom Izzo things in March. VCU might be the single best value pick in the entire draft &mdash; they face a UNC team that lost Caleb Wilson to a broken thumb, went 5-3 without him, and got bounced from the ACC Tournament by Clemson. The Rams have won 16 of their last 17 and VCU's Terrence Hill Jr. is about to light up a UNC defense ranked 242nd in opponent 3-point percentage. South Florida vs. Louisville is another coin flip. The concern? Duke is running a seven-man rotation with Caleb Foster out for the tournament and Ngongba questionable. That's a fatigue timebomb. If Ngongba plays, this is a top-2 roster. If Duke flames out early, the Rocket stalls on the launchpad.
+      VCU delivered even better than we predicted &mdash; <strong>21 points after completing the largest first-round comeback in NCAA tournament history</strong> to beat UNC in overtime. Duke and Michigan State also advanced, though Duke looked shaky against Siena &mdash; a team Luke also drafted &mdash; meaning Red was actually rooting against its own 1-seed for the 31-point Siena upset. Welcome to FDM brain. The best subplot of the first round? <strong>Red and Salmon had two 6-vs-11 matchups against each other</strong> &mdash; VCU over UNC, Louisville over South Florida &mdash; both close, both dramatic, and they split the series 1-1. Red took the high-risk, high-reward approach with two 11-seeds; Salmon played it conservative with the 6s. It's too early to tell who made the right call, but Red netted more points in round 1 &mdash; VCU's upset was worth 21 while Louisville's win only generated 11. The path forward is clear: <strong>Red needs UCLA and Villanova to not just win, but make the Sweet 16</strong> to close the gap on Green. If Furman pulls the 15-over-2 upset, that's 29 points in one game. The Rocket hasn't stalled &mdash; but it needs a booster.
     </div>
     <div class="vibe-meter">
       <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:80%; background: linear-gradient(90deg, var(--red), #FF6B6B);"></div></div>
-      <span>Boom or Bust</span>
+      <div class="vibe-bar"><div class="vibe-fill" style="width:72%; background: linear-gradient(90deg, var(--red), #FF6B6B);"></div></div>
+      <span>VCU Vindicated</span>
     </div>
   </div>
-
-  <!-- #4 JOE — ORANGE -->
+ 
+  <!-- #5 BOB1 — PURPLE -->
   <div class="ranking-card">
     <div class="rank-header">
-      <div class="rank-number">4</div>
+      <div class="rank-number">5</div>
+      <div class="rank-info">
+        <div class="team-color-bar" style="background: var(--purple);"></div>
+        <div class="team-name" style="color: var(--purple);">Purple Reign</div>
+        <div class="team-owner">Bob1</div>
+      </div>
+    </div>
+    <div class="score-line">22 PTS &bull; 6 of 8 teams alive &bull; &darr; from #2</div>
+    <div class="roster-chips">
+      <span class="chip star">Purdue (2)</span>
+      <span class="chip scored">Illinois (3) +5</span>
+      <span class="chip star">St. John's (5)</span>
+      <span class="chip star">SMU / <span style="text-decoration:underline">Miami OH</span> (11)</span>
+      <span class="chip star">Hofstra (13)</span>
+      <span class="chip dead">Kennesaw St. (14) &times;</span>
+      <span class="chip dead">North Dakota St. (14) &times;</span>
+      <span class="chip scored">Saint Louis (9) +17</span>
+    </div>
+    <div class="blurb">
+      The preseason sleeper pick has hit the snooze button &mdash; but in fairness, most of the roster hasn't played yet. Illinois beat Penn (5 pts) and Saint Louis stunned Georgia for 17 &mdash; but the crown jewel, <strong>St. John's, hasn't played yet.</strong> That game against Northern Iowa is absolutely massive: if the Johnnies win, Bob1 gets a deep-run contender. If Northern Iowa pulls the upset, Lia gets another 23-point bomb and Bob1 loses the whole thesis for this roster. Purdue, SMU/Miami OH, and Hofstra are still waiting too. Historically, at least one First Four team advances past the first round &mdash; but Green's Texas already put on the glass slipper by beating BYU. Is there room for a second Cinderella, or did Texas use up all the play-in magic? Purple Reign needs the rest of the first round to go right in a big way.
+    </div>
+    <div class="vibe-meter">
+      <span>Vibes</span>
+      <div class="vibe-bar"><div class="vibe-fill" style="width:60%; background: linear-gradient(90deg, var(--purple), #D896FF);"></div></div>
+      <span>Holding Breath</span>
+    </div>
+  </div>
+ 
+  <!-- #6 JOE — ORANGE -->
+  <div class="ranking-card">
+    <div class="rank-header">
+      <div class="rank-number">6</div>
       <div class="rank-info">
         <div class="team-color-bar" style="background: var(--orange);"></div>
         <div class="team-name" style="color: var(--orange);">Agent Orange</div>
         <div class="team-owner">Joe</div>
       </div>
     </div>
+    <div class="score-line">21 PTS &bull; 6 of 8 teams alive &bull; &darr; from #4</div>
     <div class="roster-chips">
       <span class="chip star">UConn (2)</span>
-      <span class="chip star">Arkansas (4)</span>
-      <span class="chip star">Virginia (3)</span>
-      <span class="chip">Saint Mary's (7)</span>
-      <span class="chip">Texas Tech (5)</span>
-      <span class="chip">Hawaii (13)</span>
-      <span class="chip">Miami FL (7)</span>
-      <span class="chip">Tennessee St. (15)</span>
+      <span class="chip scored">Arkansas (4) +7</span>
+      <span class="chip scored">Virginia (3) +5</span>
+      <span class="chip dead">Saint Mary's (7) &times;</span>
+      <span class="chip scored">Texas Tech (5) +9</span>
+      <span class="chip dead">Hawaii (13) &times;</span>
+      <span class="chip star">Miami FL (7)</span>
+      <span class="chip star">Tennessee St. (15)</span>
     </div>
     <div class="blurb">
-      Agent Orange is the steady, respectable roster that won't blow up the group chat on Thursday but could quietly be in first place by Monday. <strong>UConn at 25-1</strong> is attracting sharp money at every sportsbook in America, because when you've got Dan Hurley and two national titles in the last three years, you don't fade that in March. Arkansas has won 13 of its last 15 behind Darius Acuff Jr., who might be the best player in the West region. Virginia is a 3-seed. Texas Tech is solid. And Hawaii &mdash; yes, Hawaii &mdash; runs a bizarre no-help, one-on-one defense that ranks 43rd nationally in KenPom efficiency. If the Rainbow Warriors pull the 13-over-4 upset, that's 25 FDM points in one game. Joe's roster doesn't have the upside fireworks of some others, but it's deep, well-rounded, and has no obvious disaster matchups. The Toyota Camry of FDM rosters: it just works.
+      The Toyota Camry got rear-ended &mdash; though Joe still has three teams waiting to play, so the picture is incomplete. Hawaii and Saint Mary's are both out, but Virginia just took care of Wright State for 5 points, and the remaining total (21 from Arkansas, Texas Tech, and Virginia) is starting to look respectable. The good news? <strong>UConn still hasn't played yet</strong>, and that's the strongest remaining team on this roster. If UConn goes on a Dan Hurley revenge tour, Agent Orange can still climb. But the steady, no-holes roster we described pre-tournament now has two holes, and Joe needs the second half of the first round to start making up ground.
     </div>
     <div class="vibe-meter">
       <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:74%; background: linear-gradient(90deg, var(--orange), #FFB347);"></div></div>
-      <span>Quietly Dangerous</span>
+      <div class="vibe-bar"><div class="vibe-fill" style="width:52%; background: linear-gradient(90deg, var(--orange), #FFB347);"></div></div>
+      <span>Waiting on Hurley</span>
     </div>
   </div>
-
-  <!-- #5 CHAD — SALMON -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number">5</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background: var(--salmon);"></div>
-        <div class="team-name" style="color: var(--salmon);">Sa(L)mon Says</div>
-        <div class="team-owner">Chad</div>
-      </div>
-    </div>
-    <div class="roster-chips">
-      <span class="chip star">Arizona (1)</span>
-      <span class="chip">Alabama (4)</span>
-      <span class="chip">Kansas (4)</span>
-      <span class="chip">Nebraska (4)</span>
-      <span class="chip">Louisville (6)</span>
-      <span class="chip">North Carolina (6)</span>
-      <span class="chip">Texas A&M (10)</span>
-      <span class="chip">Lehigh/PVAMU (16)</span>
-    </div>
-    <div class="blurb">
-      On paper, Arizona (+400, healthiest 1-seed, CBS experts' most popular title pick) should carry this roster to the promised land. And Alabama's offense averages 91.7 points per game, which is just obscene. Kansas has the potential #1 NBA Draft pick in Darryn Peterson. There's real talent here. <strong>But then you look at the 6-seeds and wince.</strong> Louisville is staring down South Florida in a game Vegas basically calls a toss-up, and North Carolina without Caleb Wilson just lost to Clemson in the ACC Tournament and looked like a team ready to be put out of its misery. Oh, and Alabama guard Aden Holloway (16.8 PPG) was just arrested this week after police allegedly found over two pounds of marijuana at his residence. Is that a lot? Honestly, we have no idea. We're pretty boring when it comes to pot. Team Orange will have to opine on that topic. What we do know is that it's not great for Chad's second-best team heading into Thursday. In FDM, 6-seeds are the biggest trap in the draft &mdash; they're as likely to make the Final Four as 7-seeds and half as likely as 8-seeds, which is just disrespectful to the concept of seeding. Chad is basically betting that his 1-seed and three 4-seeds generate enough deep-run points to overcome the dead weight. It's possible. But those 6-seeds put the hard "L" in SaLmon.
-    </div>
-    <div class="vibe-meter">
-      <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:65%; background: linear-gradient(90deg, var(--salmon), #FFB4A8);"></div></div>
-      <span>6-Seed Anxiety</span>
-    </div>
-  </div>
-
-  <!-- #6 LUCAS — PINK -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number">6</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background: var(--hotpink);"></div>
-        <div class="team-name" style="color: var(--hotpink);">Tickled Pink</div>
-        <div class="team-owner">Lucas</div>
-      </div>
-    </div>
-    <div class="roster-chips">
-      <span class="chip star">Houston (2)</span>
-      <span class="chip star">Gonzaga (3)</span>
-      <span class="chip">Wisconsin (5)</span>
-      <span class="chip">McNeese (12)</span>
-      <span class="chip">Missouri (10)</span>
-      <span class="chip">Cal Baptist (13)</span>
-      <span class="chip">Akron (12)</span>
-      <span class="chip">LIU (16)</span>
-    </div>
-    <div class="blurb">
-      Tickled Pink? Not yet. But Lucas might be by the end of the first weekend, and it all hinges on one beautiful setup: Houston (12-1 title odds) is a legitimate monster &mdash; last year's championship game runners-up brought back their core and added Kingston Flemings, a lock top-10 NBA pick. And here's the kicker: the South regional rounds are being <strong>played in Houston</strong>, giving the Cougars a borderline home-court advantage through the Elite Eight. Gonzaga is a 3-seed with that classic Gonzaga "we'll be fine in March" energy. But after those two, it gets quiet. Wisconsin is interesting, Missouri gets a pseudo-home game in St. Louis, and McNeese has 12-over-5 upset potential. Cal Baptist has a top-50 defense but an offense ranked 191st. This roster needs Houston to go on a war path and Gonzaga to back it up, because the bottom half isn't producing fireworks.
-    </div>
-    <div class="vibe-meter">
-      <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:60%; background: linear-gradient(90deg, var(--hotpink), #FFB6C1);"></div></div>
-      <span>Houston or Bust</span>
-    </div>
-  </div>
-
+ 
   <!-- #7 BOX — BLUE -->
   <div class="ranking-card">
     <div class="rank-header">
@@ -449,62 +275,65 @@
         <div class="team-owner">Box</div>
       </div>
     </div>
+    <div class="score-line">9 PTS &bull; 4 of 8 teams alive &bull; &mdash; at #7</div>
     <div class="roster-chips">
       <span class="chip star">Iowa St. (2)</span>
-      <span class="chip">Vanderbilt (5)</span>
-      <span class="chip">Iowa (9)</span>
-      <span class="chip">Utah St. (9)</span>
-      <span class="chip">Ohio St. (8)</span>
-      <span class="chip">Troy (13)</span>
-      <span class="chip">Georgia (8)</span>
-      <span class="chip">Idaho (15)</span>
+      <span class="chip scored">Vanderbilt (5) +9</span>
+      <span class="chip star">Iowa (9)</span>
+      <span class="chip star">Utah St. (9)</span>
+      <span class="chip dead">Ohio St. (8) &times;</span>
+      <span class="chip dead">Troy (13) &times;</span>
+      <span class="chip dead">Georgia (8) &times;</span>
+      <span class="chip dead">Idaho (15) &times;</span>
     </div>
     <div class="blurb">
-      Iowa State is a real-deal title contender at 18-1, and TJ Otzelberger's crew is the best defensive team in the Midwest. Vanderbilt is a good 5-seed. After that? Box has assembled the most aggressively mid roster in FDM history. <strong>Two 8-seeds. Two 9-seeds. A 13 and a 15.</strong> In a normal bracket pool that's fine. In FDM, where 8-seeds and 9-seeds are historically mediocre point producers, you're looking at a roster where six of your eight teams are fighting for table scraps. Iowa State needs to go to the Final Four &mdash; at minimum &mdash; for this roster to have any chance. It's the FDM equivalent of showing up to a potluck with one really nice bottle of wine and six bags of store-brand chips.
+      <strong>Half the roster is dead.</strong> Ohio State, Troy, Georgia, and Idaho are all eliminated. Vanderbilt's 9 points over McNeese is the lone bright spot. Box likes to say you just need to bring your first four picks out of the first round to have a chance, and maybe that's true &mdash; but we'd push back. FDM winners tend to bring five or six teams to the second round AND score respectable points in the first, which happens pretty much by definition when that many teams advance. Box has four teams alive and 9 points. That's not the formula. Then again, those four teams alive ARE the top four picks &mdash; Iowa State, Vanderbilt, Iowa, and Utah State &mdash; so maybe Box is just saying this to convince themselves they're still relevant, or maybe they're actually on to something. We won't know until probably after the second round. Madness!
     </div>
     <div class="vibe-meter">
       <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:48%; background: linear-gradient(90deg, var(--blue), #87CEFA);"></div></div>
-      <span>Mid-Major Energy</span>
+      <div class="vibe-bar"><div class="vibe-fill" style="width:30%; background: linear-gradient(90deg, var(--blue), #87CEFA);"></div></div>
+      <span>Life Support</span>
     </div>
   </div>
-
-  <!-- #8 BOB2 — SILVER -->
+ 
+  <!-- #8 LUCAS — PINK -->
   <div class="ranking-card">
     <div class="rank-header">
       <div class="rank-number">8</div>
       <div class="rank-info">
-        <div class="team-color-bar" style="background: var(--silver);"></div>
-        <div class="team-name" style="color: var(--silver);">Tarnished Silver</div>
-        <div class="team-owner">Bob2</div>
+        <div class="team-color-bar" style="background: var(--hotpink);"></div>
+        <div class="team-name" style="color: var(--hotpink);">Tickled Pink</div>
+        <div class="team-owner">Lucas</div>
       </div>
     </div>
+    <div class="score-line">8 PTS &bull; 4 of 8 teams alive &bull; &darr; from #6</div>
     <div class="roster-chips">
-      <span class="chip">Kentucky (7)</span>
-      <span class="chip">Tennessee (6)</span>
-      <span class="chip">BYU (6)</span>
-      <span class="chip">UCF (10)</span>
-      <span class="chip">Clemson (8)</span>
-      <span class="chip">Penn (14)</span>
-      <span class="chip">TCU (9)</span>
-      <span class="chip">Howard/UMBC (16)</span>
+      <span class="chip scored">Houston (2) +3</span>
+      <span class="chip scored">Gonzaga (3) +5</span>
+      <span class="chip dead">Wisconsin (5) &times;</span>
+      <span class="chip dead">McNeese (12) &times;</span>
+      <span class="chip star">Missouri (10)</span>
+      <span class="chip star">Cal Baptist (13)</span>
+      <span class="chip dead">Akron (12) &times;</span>
+      <span class="chip dead">LIU (16) &times;</span>
     </div>
     <div class="blurb">
-      We don't want to be mean. We really don't. But somebody has to be last, and Bob2's roster reads like a list of teams you pick to lose in the second round of every bracket you've ever filled out. <strong>Two 6-seeds</strong> (Tennessee and BYU) &mdash; the biggest draft trap in FDM. No team in the top-20 of title odds. Kentucky is the headliner at 7-seed, which tells you everything. The lone upside play is BYU itself, where AJ Dybantsa (the nation's leading scorer at 25.3 PPG, possible #1 NBA pick, First Team All-American) has been dropping 40-pieces in the Big 12 Tournament &mdash; but the Cougars went 9-9 in league play, lost co-star Richie Saunders to a torn ACL, and are wildly inconsistent. If Dybantsa goes nuclear and BYU makes a Sweet 16 run as a 6-seed, that's enormous FDM value from a spot nobody expects it. Penn has former Duke forward TJ Power, which is a nice story, but it's not a path to points. This is the Silverback Gorilla without the gorilla. Just the silver, slowly tarnishing. Bob2 needs Dybantsa to channel his inner Jimmer Fredette, and even then, it might not be enough.
+      This is the FDM paradox in its purest form. Houston and Gonzaga both won &mdash; and it barely matters. Houston beat Idaho for 3 points. Gonzaga beat Kennesaw State for 5. That's <strong>8 total points from two legitimate title contenders.</strong> Meanwhile, Wisconsin got obliterated by High Point (giving Lia 23 points in the process), McNeese fell to Vanderbilt, Akron lost to Texas Tech, and LIU got smoked by Arizona. Four teams dead. The bottom half of this roster didn't just underperform &mdash; it actively helped the competition. Lucas needs Houston and Gonzaga to go on deep runs, because there's almost nobody left to help them.
     </div>
     <div class="vibe-meter">
       <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:32%; background: linear-gradient(90deg, var(--silver), #E0E0E0);"></div></div>
-      <span>Thoughts & Prayers</span>
+      <div class="vibe-bar"><div class="vibe-fill" style="width:25%; background: linear-gradient(90deg, var(--hotpink), #FFB6C1);"></div></div>
+      <span>FDM Paradox</span>
     </div>
   </div>
-
+ 
   <div class="footer-note">
     FDM 2026 &bull; Scoring: Winner Seed &minus; Loser Seed + 16 &bull; Snake Draft &bull; 8 Teams &bull; 8 Players<br>
-    Rankings based on KenPom, COOPER (Nate Silver), Vegas odds, and vibes as of March 18, 2026<br>
-    No teams were harmed in the making of these rankings. Except Bob2's.
+    Rankings based on actual results through 20 of 63 games as of March 20, 2026<br>
+    High Point over Wisconsin is the upset of the tournament so far. And it's not close.
   </div>
-
+ 
 </div>
 </body>
 </html>
+ 
