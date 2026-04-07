@@ -3,288 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FDM 2026 Power Rankings</title>
+<title>FDM 2026 Season Recap</title>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root { --bg:#0f0f0f;--card-bg:#1a1a1a;--text:#e8e4df;--text-muted:#8a8580;--accent:#ff4444;--border:#2a2a2a;--salmon:#FA8072;--red:#FF0000;--hotpink:#FF69B4;--silver:#C0C0C0;--orange:#FF8C00;--blue:#4169E1;--purple:#9B30FF;--green:#32CD32; }
   * { margin:0;padding:0;box-sizing:border-box; }
   body { background:var(--bg);color:var(--text);font-family:'Source Serif 4',Georgia,serif;line-height:1.7;min-height:100vh; }
   .noise { position:fixed;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999; }
-  .header { text-align:center;padding:60px 20px 40px;border-bottom:3px solid var(--accent);position:relative;overflow:hidden; }
-  .header::before { content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,68,68,0.08) 0%,transparent 60%); }
-  .header .kicker { font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;position:relative; }
+  .header { text-align:center;padding:60px 20px 40px;border-bottom:3px solid var(--green);position:relative;overflow:hidden; }
+  .header::before { content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(50,205,50,0.08) 0%,transparent 60%); }
+  .header .kicker { font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:16px;position:relative; }
   .header h1 { font-family:'Dela Gothic One',sans-serif;font-size:clamp(2.2rem,6vw,4.5rem);line-height:1.05;letter-spacing:-1px;position:relative;margin-bottom:12px; }
   .header .subtitle { font-style:italic;font-size:1.15rem;color:var(--text-muted);max-width:600px;margin:0 auto;position:relative; }
   .header .dateline { font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-muted);margin-top:20px;position:relative; }
   .container { max-width:780px;margin:0 auto;padding:0 20px 80px; }
-  .intro { padding:40px 0 30px;font-size:1.1rem;color:var(--text-muted);border-bottom:1px solid var(--border); }
-  .ranking-card { border-bottom:1px solid var(--border);padding:40px 0;position:relative;opacity:0;animation:fadeUp 0.5s ease forwards; }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  .ranking-card:nth-child(1){animation-delay:0.1s} .ranking-card:nth-child(2){animation-delay:0.15s} .ranking-card:nth-child(3){animation-delay:0.2s} .ranking-card:nth-child(4){animation-delay:0.25s} .ranking-card:nth-child(5){animation-delay:0.3s} .ranking-card:nth-child(6){animation-delay:0.35s} .ranking-card:nth-child(7){animation-delay:0.4s} .ranking-card:nth-child(8){animation-delay:0.45s}
-  .rank-header { display:flex;align-items:flex-start;gap:16px;margin-bottom:14px; }
-  .rank-number { font-family:'Dela Gothic One',sans-serif;font-size:3.5rem;line-height:1;min-width:60px;color:var(--text-muted);opacity:0.3; }
-  .rank-info { flex:1; }
-  .team-name { font-family:'Dela Gothic One',sans-serif;font-size:1.5rem;line-height:1.2;margin-bottom:4px; }
-  .team-color-bar { height:4px;width:80px;border-radius:2px;margin-bottom:8px; }
-  .team-owner { font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted); }
-  .score-line { font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);margin-bottom:6px; }
-  .roster-chips { display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px; }
-  .chip { font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:var(--card-bg);border:1px solid var(--border);color:var(--text-muted);white-space:nowrap; }
-  .chip.dead { text-decoration:line-through;opacity:0.4; }
-  .chip.ff { border-color:rgba(255,215,0,0.5);color:#FFD700;background:rgba(255,215,0,0.08); }
-  .blurb { font-size:1.05rem;line-height:1.8;color:var(--text); }
-  .blurb strong { color:#fff; }
-  .vibe-meter { display:flex;align-items:center;gap:10px;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted); }
-  .vibe-bar { height:6px;border-radius:3px;flex:1;background:var(--border);overflow:hidden;max-width:200px; }
-  .vibe-fill { height:100%;border-radius:3px;transition:width 1s ease; }
-  .matchup-box { background:#151515;border:1px solid var(--border);border-radius:6px;padding:16px;margin:20px 0;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:2;color:var(--text-muted); }
-  .matchup-box .matchup-title { color:var(--accent);font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px; }
+  .section { padding:40px 0 30px;font-size:1.05rem;color:var(--text);line-height:1.8;border-bottom:1px solid var(--border); }
+  .section strong { color:#fff; }
+  .section-title { font-family:'Dela Gothic One',sans-serif;font-size:1.3rem;margin-bottom:16px;color:var(--text); }
+  .section-kicker { font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:8px; }
   .footer-note { margin-top:60px;padding-top:30px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;text-align:center;line-height:2; }
 </style>
 </head>
 <body>
 <div class="noise"></div>
 <div class="header">
-  <div class="kicker">The Only Rankings That Matter</div>
-  <h1>FDM 2026<br>Power Rankings</h1>
-  <div class="subtitle">Eight teams. Sixty-four schools. One very silly scoring system that takes way too long to explain.</div>
-  <div class="dateline">April 6, 2026 &bull; Championship Edition &bull; 62 of 63 Games Played</div>
+  <div class="kicker">FDM 2026 &bull; The Final Word</div>
+  <h1>The Green Machine<br>Wins It All</h1>
+  <div class="subtitle">Michigan 69, UConn 63. Lia finishes at 133 points. The 2026 FDM champion has been crowned.</div>
+  <div class="dateline">April 7, 2026 &bull; Season Recap &bull; 63 of 63 Games Played</div>
 </div>
 <div class="container">
 
-  <div class="intro">
-    One game left. For the first time in sixteen editions of FDM, the winner of the national championship will determine the winner of FDM. Michigan demolished Arizona 91-73 on Saturday &mdash; the first team in tournament history to score 90+ and win by double digits in five consecutive NCAA Tournament games. UConn beat Illinois 71-62, with Braylon Mullins scoring 15 and Tarris Reed Jr. posting another double-double. The semifinal results eliminated Chad (Arizona lost) and Bob1 (Illinois lost) from FDM contention, despite Chad being tied for the lead at 118 points. Tonight, Lia and Joe will watch the championship game knowing exactly what's at stake: the FDM title comes down to one shining moment.
+  <div class="section">
+    <div class="section-kicker">The Championship</div>
+    <div class="section-title">Green Wins Its First Title Since 2017</div>
+    The Green Machine is back on top. Michigan's 69-63 win over UConn gives Lia 133 FDM points and the 2026 championship &mdash; Green's first title since 2017 and third overall, pulling Lia into sole possession of second place on the all-time wins list behind Luke. It wasn't pretty: Michigan held UConn to 30.8% shooting and made 25 of 28 free throws in a grinder that looked nothing like the Wolverines' five previous blowouts. Yaxel Lendeborg, playing through a sprained MCL and rolled ankle, went just 4-for-13 from the field but still scored 13. Elliot Cadeau &mdash; a transfer from North Carolina who was "really down on myself" a year ago &mdash; scored 19 points and was named the Final Four's Most Outstanding Player. UConn cut it to four with under eight minutes left, but Michigan answered every run. Trey McKenney's dagger three with 1:50 remaining sealed it. Michigan ends its own 37-year championship drought and the Big Ten's 26-year conference-wide drought. Dan Hurley's bid for three titles in four years falls just short.
   </div>
 
-  <div class="matchup-box">
-    <div class="matchup-title">National Championship &mdash; Lucas Oil Stadium, Indianapolis &mdash; Tonight 8:49 PM ET</div>
-    <span style="color:#FFD700;">&#9733; (1) Michigan vs (2) UConn</span> &mdash; Lia vs Joe &mdash; MICH -6.5 &bull; ML: MICH -300 / UCONN +240<br>
-    <br>
-    <span style="color:#fff;">If Michigan wins:</span> Lia 133, Chad 118, Bob1 104, Joe 103. <span style="color:var(--green);">Lia wins FDM by 15.</span><br>
-    <span style="color:#fff;">If UConn wins:</span> Joe 120, Lia 118, Chad 118, Bob1 104. <span style="color:var(--orange);">Joe wins FDM by 2.</span>
-  </div>
-
-  <!-- #1 LIA — GREEN -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number">1</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background:var(--green);"></div>
-        <div class="team-name" style="color:var(--green);">The Green Machine</div>
-        <div class="team-owner">Lia</div>
-      </div>
-    </div>
-    <div class="score-line">118 PTS &bull; 1 of 8 teams alive &bull; 1 of 2 paths to victory &bull; &uarr; from #3</div>
-    <div class="roster-chips">
-      <span class="chip ff">Michigan (1) +49 &bull; CHAMPIONSHIP GAME</span>
-      <span class="chip dead">Florida (1) +1</span>
-      <span class="chip dead">NC State / <span style="text-decoration:underline">Texas</span> (11) +45</span>
-      <span class="chip dead">High Point (12) +23</span>
-      <span class="chip dead">Santa Clara (10) +0</span>
-      <span class="chip dead">Northern Iowa (12) +0</span>
-      <span class="chip dead">Queens (15) +0</span>
-      <span class="chip dead">Wright St. (14) +0</span>
-    </div>
-    <div class="blurb">
-      Michigan has been the most dominant team in America for three weeks, and it's not particularly close. The Wolverines are the first team in tournament history to score 90+ and win by double digits in five straight NCAA Tournament games. Yaxel Lendeborg is playing through a sprained MCL and rolled ankle suffered in the Arizona game, but has said he's playing "no matter what." Michigan is a 6.5-point favorite and -300 on the moneyline. <strong>If Michigan wins, Lia finishes at 133 and wins FDM by 15 points.</strong> The Green Machine that lost an engine when Florida fell in the second round &mdash; the roster we dropped from #1 to #4 &mdash; is now one game from the title. Michigan hasn't won a national championship since 1989. The Big Ten hasn't had one since Michigan State in 2000. Tonight, Michigan can end both droughts at once.
-    </div>
-    <div class="vibe-meter">
-      <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:92%;background:linear-gradient(90deg,var(--green),#90EE90);"></div></div>
-      <span>One Game Away</span>
-    </div>
-  </div>
-
-  <!-- #2 JOE — ORANGE -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number">2</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background:var(--orange);"></div>
-        <div class="team-name" style="color:var(--orange);">Agent Orange</div>
-        <div class="team-owner">Joe</div>
-      </div>
-    </div>
-    <div class="score-line">103 PTS &bull; 1 of 8 teams alive &bull; 1 of 2 paths to victory &bull; &uarr; from #4</div>
-    <div class="roster-chips">
-      <span class="chip ff">UConn (2) +61 &bull; CHAMPIONSHIP GAME</span>
-      <span class="chip dead">Arkansas (4) +15</span>
-      <span class="chip dead">Virginia (3) +5</span>
-      <span class="chip dead">Texas Tech (5) +9</span>
-      <span class="chip dead">Saint Mary's (7) +0</span>
-      <span class="chip dead">Miami FL (7) +13</span>
-      <span class="chip dead">Hawaii (13) +0</span>
-      <span class="chip dead">Tennessee St. (15) +0</span>
-    </div>
-    <div class="blurb">
-      This is the closest Agent Orange has ever come to winning FDM &mdash; and probably the most white-knuckle road to a championship game any FDM team has ever taken. Furman was within 5 with six minutes left in a 2-vs-15 game. Michigan State came back from 19 down to within 1. Duke led by 15 at halftime before Braylon Mullins' 35-foot buzzer-beater. Most of UConn's tournament was decided in the final minutes, and Joe has been on the edge of elimination in nearly every round. UConn has reached the championship game for the third time in four years under Dan Hurley, and won it the other two times. And here's a stat that might be unprecedented in FDM history: <strong>UConn single-handedly destroyed Luke's entire tournament.</strong> The Huskies beat Furman (82-71), UCLA (73-57), Michigan State (67-63), and Duke (buzzer-beater) &mdash; four of Luke's eight teams, eliminated one per round, each on the way to this championship game. Savage. <strong>If UConn wins tonight, Joe finishes at 120 and wins FDM by 2 points over Lia and Chad, both stuck at 118.</strong> Two points. That's the margin. UConn is a 6.5-point underdog and +240 on the moneyline &mdash; roughly a 30% implied probability. UConn guard Solo Ball suffered a foot sprain in the Illinois game and was in a walking boot Sunday; game-time decision tonight. But Dan Hurley in a championship game is 2-0, and the Huskies have won 18 of their last 19 tournament games.
-    </div>
-    <div class="vibe-meter">
-      <span>Vibes</span>
-      <div class="vibe-bar"><div class="vibe-fill" style="width:70%;background:linear-gradient(90deg,var(--orange),#FFB347);"></div></div>
-      <span>Hurley 2-0 in Finals</span>
-    </div>
-  </div>
-
-  <!-- ELIMINATED: CHAD -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number" style="font-size:1.8rem;opacity:0.5;">&times;</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background:var(--salmon);"></div>
-        <div class="team-name" style="color:var(--salmon);">Salmon Supreme &mdash; Filleted</div>
-        <div class="team-owner">Chad &bull; Eliminated April 4 &bull; 118 PTS</div>
-      </div>
-    </div>
-    <div class="blurb" style="color:var(--text-muted);">Tied for the FDM lead. Can't win. Arizona fell to Michigan 91-73 in the semifinal, and now Chad sits at 118 with no teams left &mdash; watching from the same point total as Lia, who still has Michigan playing tonight. Chad held first place after the Elite Eight, was the only player who could win FDM without a championship, and led the league for most of the tournament. It wasn't enough. The Salmon reached the spawning ground and got filleted.</div>
-  </div>
-
-  <!-- ELIMINATED: BOB1 -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number" style="font-size:1.8rem;opacity:0.5;">&times;</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background:var(--purple);"></div>
-        <div class="team-name" style="color:var(--purple);">Purple Reign &mdash; Dethroned</div>
-        <div class="team-owner">Bob1 &bull; Eliminated April 4 &bull; 104 PTS</div>
-      </div>
-    </div>
-    <div class="blurb" style="color:var(--text-muted);">Illinois lost to UConn 71-62 in the semifinal. Bob1 won FDM in 2015, so this isn't Purple's best finish &mdash; but this might have been the best roster Bob1 has ever constructed. Three teams in the Sweet 16 with seeds of 2, 3, and 5. Two in the Elite Eight. One in the Final Four. The COOPER thesis on St. John's validated. Illinois playing the best defense in the tournament. 104 points. Bob1 led FDM after the first Elite Eight game and held a 53% win probability entering the weekend. Then Arizona beat Purdue, and the math shifted. Then UConn beat Illinois, and the math ended.</div>
-  </div>
-
-  <!-- ELIMINATED: LUKE -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number" style="font-size:1.8rem;opacity:0.5;">&times;</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background:var(--red);"></div>
-        <div class="team-name" style="color:var(--red);">Red Rocket &mdash; Grounded</div>
-        <div class="team-owner">Luke &bull; Eliminated March 29 &bull; 73 PTS</div>
-      </div>
-    </div>
-    <div class="blurb" style="color:var(--text-muted);">Duke led UConn 44-29 at halftime. Then Braylon Mullins hit a 35-foot buzzer-beater, and the Red Rocket's season ended on a shot that will be replayed for decades. But the buzzer-beater was just the final blow: Joe's UConn eliminated four of Luke's eight teams &mdash; Furman, UCLA, Michigan State, and Duke &mdash; one per round, each on the way to this championship game. Three of those four games were decided in the final minutes. One school, four kills. Red never had a chance.</div>
-  </div>
-
-  <!-- ELIMINATED: BOB2 -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number" style="font-size:1.8rem;opacity:0.5;">&times;</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background:var(--silver);"></div>
-        <div class="team-name" style="color:var(--silver);">Silver &mdash; Tarnished</div>
-        <div class="team-owner">Bob2 &bull; Eliminated March 29 &bull; 80 PTS</div>
-      </div>
-    </div>
-    <div class="blurb" style="color:var(--text-muted);">Tennessee's 50 FDM points from a 6-seed was a monster run, but Michigan ended it in the Midwest final.</div>
-  </div>
-
-  <!-- ELIMINATED: BOX -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number" style="font-size:1.8rem;opacity:0.5;">&times;</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background:var(--blue);"></div>
-        <div class="team-name" style="color:var(--blue);">Blue Moon &mdash; Eclipsed</div>
-        <div class="team-owner">Box &bull; Eliminated March 28 &bull; 102 PTS</div>
-      </div>
-    </div>
-    <div class="blurb" style="color:var(--text-muted);">Iowa's 62 FDM points as a 9-seed was the highest single-team output of 2026. The Cinderella run fell one game short against Illinois.</div>
-  </div>
-
-  <!-- ELIMINATED: LUCAS -->
-  <div class="ranking-card">
-    <div class="rank-header">
-      <div class="rank-number" style="font-size:1.8rem;opacity:0.5;">&times;</div>
-      <div class="rank-info">
-        <div class="team-color-bar" style="background:var(--hotpink);"></div>
-        <div class="team-name" style="color:var(--hotpink);">Frozen Pink</div>
-        <div class="team-owner">Lucas &bull; Eliminated March 22 &bull; 16 PTS</div>
-      </div>
-    </div>
-    <div class="blurb" style="color:var(--text-muted);">Still 16. Still last.</div>
-  </div>
-
-  <!-- FINAL STANDINGS PREVIEW -->
-  <div style="margin-top:60px;padding-top:40px;border-top:3px solid var(--accent);">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;">The Final Math</div>
-    <div style="font-family:'Dela Gothic One',sans-serif;font-size:1.5rem;margin-bottom:8px;">2 Possible Futures</div>
-    <div style="font-size:1rem;color:var(--text-muted);margin-bottom:30px;line-height:1.8;">One game. Two outcomes. Sixteen years of FDM, and it's never come down to this.</div>
-
-    <table style="width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:12px;">
+  <div class="section">
+    <div class="section-kicker">Final Standings</div>
+    <div class="section-title">2026 FDM Results</div>
+    <table style="width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:13px;margin:16px 0;">
       <thead>
         <tr style="border-bottom:2px solid var(--accent);text-align:left;">
+          <th style="padding:8px 4px;color:var(--text-muted);">#</th>
           <th style="padding:8px 4px;color:var(--text-muted);">PLAYER</th>
-          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">NOW</th>
-          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">IF MICH</th>
-          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">IF UCONN</th>
-          <th style="padding:8px 12px;color:var(--text-muted);">RESULT</th>
+          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">PTS</th>
+          <th style="padding:8px 4px;color:var(--text-muted);">BEST TEAM</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 4px;color:var(--green);">Lia</td>
-          <td style="padding:10px 4px;text-align:right;">118</td>
-          <td style="padding:10px 4px;text-align:right;color:#90EE90;"><strong>133</strong></td>
-          <td style="padding:10px 4px;text-align:right;">118</td>
-          <td style="padding:10px 12px;"><span style="color:#90EE90;">WINS FDM</span> / 2nd place</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 4px;color:var(--orange);">Joe</td>
-          <td style="padding:10px 4px;text-align:right;">103</td>
-          <td style="padding:10px 4px;text-align:right;">103</td>
-          <td style="padding:10px 4px;text-align:right;color:#FFB347;"><strong>120</strong></td>
-          <td style="padding:10px 12px;">4th overall / <span style="color:#FFB347;">WINS FDM</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 4px;color:var(--salmon);opacity:0.5;">Chad</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">118</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">118</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">118</td>
-          <td style="padding:10px 12px;opacity:0.5;">Eliminated</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 4px;color:var(--purple);opacity:0.5;">Bob1</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">104</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">104</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">104</td>
-          <td style="padding:10px 12px;opacity:0.5;">Eliminated</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 4px;color:var(--blue);opacity:0.5;">Box</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">102</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">102</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">102</td>
-          <td style="padding:10px 12px;opacity:0.5;">Eliminated</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 4px;color:var(--silver);opacity:0.5;">Bob2</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">80</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">80</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">80</td>
-          <td style="padding:10px 12px;opacity:0.5;">Eliminated</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 4px;color:var(--red);opacity:0.5;">Luke</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">73</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">73</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">73</td>
-          <td style="padding:10px 12px;opacity:0.5;">Eliminated</td>
-        </tr>
-        <tr>
-          <td style="padding:10px 4px;color:var(--hotpink);opacity:0.5;">Lucas</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">16</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">16</td>
-          <td style="padding:10px 4px;text-align:right;opacity:0.5;">16</td>
-          <td style="padding:10px 12px;opacity:0.5;">Eliminated</td>
-        </tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;color:var(--green);">1</td><td style="padding:8px 4px;color:var(--green);"><strong>Lia</strong></td><td style="padding:8px 4px;text-align:right;color:var(--green);">133</td><td style="padding:8px 4px;">Michigan (1) &mdash; 64 pts, natl champion</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">2</td><td style="padding:8px 4px;color:var(--salmon);">Chad</td><td style="padding:8px 4px;text-align:right;">118</td><td style="padding:8px 4px;">Arizona (1) &mdash; 37 pts, Final Four</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">3</td><td style="padding:8px 4px;color:var(--purple);">Bob1</td><td style="padding:8px 4px;text-align:right;">104</td><td style="padding:8px 4px;">Illinois (3) &mdash; 40 pts, Final Four</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">4</td><td style="padding:8px 4px;color:var(--orange);">Joe</td><td style="padding:8px 4px;text-align:right;">103</td><td style="padding:8px 4px;">UConn (2) &mdash; 61 pts, runner-up</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">5</td><td style="padding:8px 4px;color:var(--blue);">Box</td><td style="padding:8px 4px;text-align:right;">102</td><td style="padding:8px 4px;">Iowa (9) &mdash; 62 pts, Elite Eight</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">6</td><td style="padding:8px 4px;color:var(--silver);">Bob2</td><td style="padding:8px 4px;text-align:right;">80</td><td style="padding:8px 4px;">Tennessee (6) &mdash; 50 pts, Elite Eight</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">7</td><td style="padding:8px 4px;color:var(--red);">Luke</td><td style="padding:8px 4px;text-align:right;">73</td><td style="padding:8px 4px;">Duke (1) &mdash; 21 pts, Sweet 16</td></tr>
+        <tr><td style="padding:8px 4px;">8</td><td style="padding:8px 4px;color:var(--hotpink);">Lucas</td><td style="padding:8px 4px;text-align:right;">16</td><td style="padding:8px 4px;">Houston (2) &mdash; 11 pts, Sweet 16</td></tr>
       </tbody>
     </table>
   </div>
 
+  <div class="section">
+    <div class="section-kicker">The Season in Review</div>
+    <div class="section-title">Final Power Rankings</div>
+    <span style="color:var(--text-muted);font-size:0.95rem;">A note: these are power rankings, not standings. They're different. These power rankings subscribe to the Ricky Bobby mentality &mdash; if you're not first, you're last. We don't care about finishing 2nd or 3rd in points if you were mathematically eliminated before the final game. Power rankings are the order of who still had a chance to win, and Joe may have finished 4th overall in points, but in reality was the last person standing between Lia and the title. That's 2nd. Joe was swinging for the fences, and we respect that &mdash; even though 2nd is just as good as last. If you don't like it, you can start your own website to judge everyone.</span>
+    <br><br>
+    <strong style="color:var(--green);">Lia</strong> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">PRE-TOURNAMENT #1 &rarr; FINAL #1</span><br>
+    Ranked #1 in the pre-tournament power rankings, dropped to #4 after Florida was upset by Iowa in the second round, and climbed back to win it all. The Cinderella run of Texas &mdash; an 11-seed play-in team that scored 45 FDM points &mdash; carried the roster through the first two weekends while Michigan quietly took care of business. When it mattered most, Michigan was the last team standing.
+    <br><br>
+    <strong style="color:var(--orange);">Joe</strong> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">PRE-TOURNAMENT #4 &rarr; FINAL #2</span><br>
+    Took the most white-knuckle road to a championship game in FDM memory. UConn survived Furman (within 5 late), survived Michigan State (came back from 19 down to within 1), then pulled off one of the great upsets in tournament history with Braylon Mullins' 35-foot buzzer-beater to beat Duke. Once Arkansas fell in the Sweet 16, UConn was the only team Orange had left &mdash; and out of 64 remaining scenarios entering the Elite Eight, exactly 1 ended with Joe winning FDM: UConn beating Michigan in the national championship. Orange got the matchup, but not the result. This was the closest Joe has ever come to winning FDM. Michigan's 69-63 win means Joe finishes at 103 &mdash; 4th in the final standings, but we all know Orange was really 2 points shy of winning the entire FDM.
+    <br><br>
+    <strong style="color:var(--salmon);">Chad</strong> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">PRE-TOURNAMENT #5 &rarr; FINAL #3</span><br>
+    Led FDM for most of the tournament. Three teams in the Sweet 16. First place after the Elite Eight. The only player who could win FDM without a championship. Arizona was the CBS experts' most popular title pick. Then Michigan beat Alabama in the Sweet 16 and Arizona 91-73 in the Final Four &mdash; the same team, owned by the same person who ultimately won FDM. Chad was eliminated at 118, tied for the lead, with no teams left.
+    <br><br>
+    <strong style="color:var(--purple);">Bob1</strong> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">PRE-TOURNAMENT #2 &rarr; FINAL #4</span><br>
+    Assembled what might have been the best roster in Purple history: three teams in the Sweet 16 (seeds 2, 3, 5), two in the Elite Eight, one in the Final Four. The COOPER thesis on St. John's was validated. Bob1 held a 53% win probability entering the Elite Eight. Then Arizona beat Purdue, and UConn beat Illinois, and Purple was done at 104.
+    <br><br>
+    <strong style="color:var(--red);">Luke</strong> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">PRE-TOURNAMENT #3 &rarr; FINAL #5</span><br>
+    Drafted the #1 overall seed and watched it get eliminated on a half-court buzzer-beater. More on Luke below.
+    <br><br>
+    <strong style="color:var(--silver);">Bob2</strong> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">PRE-TOURNAMENT #8 &rarr; FINAL #6</span><br>
+    Rode Tennessee to 50 FDM points from a 6-seed, the second-highest single-team output of 2026. Michigan ended the run in the Elite Eight.
+    <br><br>
+    <strong style="color:var(--blue);">Box</strong> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">PRE-TOURNAMENT #7 &rarr; FINAL #7</span><br>
+    Staged the most dramatic single-day surge in recent FDM memory, going from 7th to 2nd on the strength of Iowa's 9-over-1 upset of Florida. Iowa scored 62 FDM points as a 9-seed &mdash; the highest single-team output of 2026. The roster we called "the FDM equivalent of showing up to a potluck with one nice bottle of wine and six bags of store-brand chips" finished 5th at 102 points.
+    <br><br>
+    <strong style="color:var(--hotpink);">Lucas</strong> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">PRE-TOURNAMENT #6 &rarr; FINAL #8</span><br>
+    The first player mathematically eliminated, on March 22. 16 total points. Dead last.
+  </div>
+
+  <div class="section">
+    <div class="section-kicker">FDM vs. FDM</div>
+    <div class="section-title">The Head-to-Head Wars</div>
+    In a league where eight players draft from the same 64-team field, direct collisions are inevitable. This year, they were everywhere &mdash; and they decided the title.
+    <br><br>
+    <strong style="color:var(--salmon);">Chad vs. Everyone (6-5 against 6 different opponents).</strong> No player was more entangled in head-to-head action. Chad's teams played 11 games against other FDM-rostered opponents &mdash; more direct confrontations than any other player &mdash; in every round from the first through the Final Four. Chad beat Joe twice (Alabama over Texas Tech, Arizona over Arkansas), split with Luke and Box, and beat Bob1 in the Elite Eight when Arizona knocked off Purdue. But the two losses that mattered most were both against the same team: Lia's Michigan beat Chad's Alabama in the Sweet 16, then beat Chad's Arizona in the Final Four. The team that eliminated Chad from FDM was the same team that won it all for Lia.
+    <br><br>
+    <strong style="color:var(--orange);">Joe's UConn vs. Luke's Entire Roster (4-0).</strong> The most lopsided head-to-head in recent FDM memory, and maybe ever. UConn eliminated Furman (R1, within 5 late), UCLA (R2), Michigan State (S16, came back from 19 down to within 1), and Duke (E8, Mullins buzzer-beater). Four of Luke's eight teams, killed one per round, by the same school. Three of the four games were decided in the final minutes. If any single one goes the other way, the entire FDM landscape is different.
+    <br><br>
+    <strong style="color:var(--blue);">Box's Iowa vs. Lia's Florida (24 FDM points).</strong> The single biggest game swing of the tournament. A 9-seed knocking off the defending champion 1-seed, worth 24 points, vaulting Box from 7th to 2nd in one afternoon and handing Lia a devastating loss. The Iowa-Nebraska Sweet 16 matchup (Box vs. Chad) was also a beauty &mdash; a Big Ten rubber match between regular-season rivals, with former Hawkeye Pryce Sandfort now wearing Nebraska's jersey.
+    <br><br>
+    <strong style="color:var(--purple);">Bob1 vs. Lia (2-1).</strong> Bob1 actually won the head-to-head &mdash; St. John's beat Northern Iowa, Purdue beat Texas &mdash; but Lia's Michigan beat Bob1's Saint Louis and, more importantly, outlasted everyone else. Bob1 won the battles but lost the war.
+  </div>
+
+  <div class="section">
+    <div class="section-kicker">2026 vs. History</div>
+    <div class="section-title">Where This Year Fits in 16 Editions</div>
+    <strong>Total points: 729 &mdash; second-lowest ever.</strong> Only 2025 (711) was lower. The two lowest-scoring FDM years in history are now back-to-back, and that probably isn't a coincidence. FDM points are generated by upsets &mdash; when low seeds beat high seeds, the gap between them inflates the score. So when scoring drops league-wide, it means the chalk is holding. The question is why. Is the selection committee getting better at seeding? Is NIL money consolidating talent at the top programs, making it harder for mid-majors to pull Cinderella runs? Is the transfer portal creating superteams that simply don't lose to 12-seeds anymore? Two years of data isn't a trend, but it's enough to raise the question. If 2027 comes in under 750 again, FDM may need to reckon with the possibility that the game has changed.
+    <br><br>
+    <strong>Winning score: 133 &mdash; third-lowest ever.</strong> Only Lucas's 124 in 2025 and Bob1's 127 in 2015 produced lower champions. For context, Bob2 won 2010 with 292 points and Luke won 2022 with 239. Lia's 133 would have finished outside the top 3 in most prior years.
+    <br><br>
+    <strong>Standard deviation: 33.5 &mdash; fourth-most competitive year.</strong> Only 2025 (23.2), 2019 (30.8), and 2015 (33.4) had tighter fields. The spread from 2nd to 5th place was just 16 points &mdash; Chad at 118, Bob1 at 104, Joe at 103, Box at 102. That's absurdly compact for a game decided by upsets and chaos.
+    <br><br>
+    <strong>Lucas's 16 is tied for the second-lowest individual score ever.</strong> Box scored 3 in 2014 &mdash; the all-time low that may never be broken &mdash; and Lia scored 16 in 2024. Lucas ties that mark. In a fitting bit of symmetry, Lia went from scoring 16 two years ago to winning with 133 this year. Four of Lucas's eight teams were eliminated in the first round, and the two headliners &mdash; Houston (2) and Gonzaga (3) &mdash; scored just 11 and 5 FDM points before being eliminated in the Sweet 16 and second round, respectively.
+    <br><br>
+    <strong>First time the championship game determined the FDM winner.</strong> In 16 editions, the FDM title had always been clinched &mdash; or mathematically sealed &mdash; before the final game of the NCAA Tournament. Not this year. Michigan vs. UConn was Lia vs. Joe, and neither knew the outcome until the final buzzer. That's never happened before, and it may never happen again.
+  </div>
+
+  <div class="section">
+    <div class="section-kicker">All-Time Ledger</div>
+    <div class="section-title">Career Winnings &amp; Losses (Modern 8-Player Era)</div>
+    Entry fee: $25/year. Winner takes the pot ($200). Here's where every active player stands in the modern 8-player format (2011&ndash;2026).
+    <br><br>
+    <table style="width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:12px;margin:16px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--accent);text-align:left;">
+          <th style="padding:8px 4px;color:var(--text-muted);">#</th>
+          <th style="padding:8px 4px;color:var(--text-muted);">PLAYER</th>
+          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">YRS</th>
+          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">WINS</th>
+          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">PAID IN</th>
+          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">WON</th>
+          <th style="padding:8px 4px;color:var(--text-muted);text-align:right;">NET</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">1</td><td style="padding:8px 4px;color:var(--red);">Luke</td><td style="padding:8px 4px;text-align:right;">14</td><td style="padding:8px 4px;text-align:right;">4</td><td style="padding:8px 4px;text-align:right;">$350</td><td style="padding:8px 4px;text-align:right;">$800</td><td style="padding:8px 4px;text-align:right;color:#90EE90;"><strong>+$450</strong></td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">2</td><td style="padding:8px 4px;color:var(--green);">Lia</td><td style="padding:8px 4px;text-align:right;">15</td><td style="padding:8px 4px;text-align:right;">3</td><td style="padding:8px 4px;text-align:right;">$375</td><td style="padding:8px 4px;text-align:right;">$600</td><td style="padding:8px 4px;text-align:right;color:#90EE90;"><strong>+$225</strong></td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">3</td><td style="padding:8px 4px;color:var(--hotpink);">Lucas</td><td style="padding:8px 4px;text-align:right;">3</td><td style="padding:8px 4px;text-align:right;">1</td><td style="padding:8px 4px;text-align:right;">$75</td><td style="padding:8px 4px;text-align:right;">$200</td><td style="padding:8px 4px;text-align:right;color:#90EE90;"><strong>+$125</strong></td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">4</td><td style="padding:8px 4px;color:var(--salmon);">Chad</td><td style="padding:8px 4px;text-align:right;">15</td><td style="padding:8px 4px;text-align:right;">2</td><td style="padding:8px 4px;text-align:right;">$375</td><td style="padding:8px 4px;text-align:right;">$400</td><td style="padding:8px 4px;text-align:right;color:#90EE90;"><strong>+$25</strong></td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">5</td><td style="padding:8px 4px;color:var(--blue);">Box</td><td style="padding:8px 4px;text-align:right;">15</td><td style="padding:8px 4px;text-align:right;">2</td><td style="padding:8px 4px;text-align:right;">$375</td><td style="padding:8px 4px;text-align:right;">$400</td><td style="padding:8px 4px;text-align:right;color:#90EE90;"><strong>+$25</strong></td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">6</td><td style="padding:8px 4px;color:var(--purple);">Bob1</td><td style="padding:8px 4px;text-align:right;">14</td><td style="padding:8px 4px;text-align:right;">1</td><td style="padding:8px 4px;text-align:right;">$350</td><td style="padding:8px 4px;text-align:right;">$200</td><td style="padding:8px 4px;text-align:right;color:var(--accent);"><strong>-$150</strong></td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 4px;">7</td><td style="padding:8px 4px;color:var(--silver);">Bob2</td><td style="padding:8px 4px;text-align:right;">15</td><td style="padding:8px 4px;text-align:right;">1</td><td style="padding:8px 4px;text-align:right;">$375</td><td style="padding:8px 4px;text-align:right;">$200</td><td style="padding:8px 4px;text-align:right;color:var(--accent);"><strong>-$175</strong></td></tr>
+        <tr><td style="padding:8px 4px;">8</td><td style="padding:8px 4px;color:var(--orange);">Joe</td><td style="padding:8px 4px;text-align:right;">15</td><td style="padding:8px 4px;text-align:right;">0</td><td style="padding:8px 4px;text-align:right;">$375</td><td style="padding:8px 4px;text-align:right;">$0</td><td style="padding:8px 4px;text-align:right;color:var(--accent);"><strong>-$375</strong></td></tr>
+      </tbody>
+    </table>
+    <span style="color:var(--text-muted);font-size:0.95rem;">Joe has played 15 years of FDM (8-player era) and never won. That's $375 in entry fees and $0 in winnings. Chad and Box are tied at +$25 &mdash; both with two titles in 15 years, barely in the black. Luke leads all-time earnings despite finishing 7th this year &mdash; four titles in 14 years is the most dominant stretch in FDM history. Lia's 2026 win vaults Green to second all-time and narrows the gap.</span>
+  </div>
+
+  <div class="section" style="border-bottom:none;">
+    <div class="section-kicker">The Reveal</div>
+    <div class="section-title" style="font-size:1.5rem;">The Author of the Power Rankings</div>
+    One final piece of business.
+    <br><br>
+    All season, these power rankings have appeared on the FDM GitHub Pages site &mdash; the blurbs, the analysis, the scenarios, the vibes. Someone had to write them. Someone had to maintain the editorial voice that roasted Bob2's roster in the pre-tournament edition, called Box's draft "the FDM equivalent of showing up to a potluck with one nice bottle of wine and six bags of store-brand chips," tracked every scenario, and fact-checked every seed.
+    <br><br>
+    <strong>That someone was Luke.</strong>
+    <br><br>
+    Yes, the same Luke who drafted Duke, VCU, Michigan State, South Florida, UCLA, Villanova, Furman, and Siena &mdash; and watched Joe's UConn systematically eliminate four of those teams, one per round, on the way to the championship game. The same Luke who finished 7th at 73 points. The same Luke who wrote his own eliminated blurb: <em>"Duke led UConn 44-29 at halftime. Then Braylon Mullins hit a 35-foot buzzer-beater."</em>
+    <br><br>
+    Like Lady Whistledown in <em>Bridgerton</em>, the anonymous chronicler has been among you the entire time &mdash; drafting, losing, and writing about it all with the same pen. The power rankings were never neutral. They were written by someone with skin in the game, who finished second-to-last, and who had to describe his own demise in the third person. If that isn't the FDM spirit, nothing is.
+  </div>
+
   <div class="footer-note">
     FDM 2026 &bull; Scoring: Winner Seed &minus; Loser Seed + 16 &bull; Snake Draft &bull; 8 Teams &bull; 8 Players<br>
-    62 of 63 games played &bull; 1 game remaining &bull; 16 editions of FDM &bull; First time the natty determines the winner<br>
-    Michigan -6.5. UConn +240. Lia or Joe. 8:49 PM ET. One shining moment indeed.
+    63 of 63 games played &bull; Lia wins FDM 2026 with 133 points &bull; Michigan wins the national championship<br>
+    Power rankings written by Luke. Yes, that Luke. See you next March.
   </div>
 
 </div>
